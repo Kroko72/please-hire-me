@@ -19,21 +19,21 @@ def save_item(item: Example):
         conn.commit()
     return item
 
-@app.get("/kind/{uuid}/")
+@app.get("/engine/{uuid}/")
 def get_item(uuid: UUID):
     with engine.connect() as conn:
         statement = select(App).where(App.uuid==uuid)
         res = conn.execute(statement).fetchall()
     return res
 
-@app.get("/kind/{uuid}/state")
+@app.get("/engine/{uuid}/state")
 def get_item_state(uuid: UUID):
     with engine.connect() as conn:
         statement = select(App.state).where(App.uuid==uuid)
         res = conn.execute(statement).fetchall()
     return res
     
-@app.delete("/kind/{uuid}/")
+@app.delete("/engine/{uuid}/")
 def delete_item(uuid: UUID):
     with engine.connect() as conn:
         statement = delete(App).where(App.uuid==uuid)
@@ -41,7 +41,7 @@ def delete_item(uuid: UUID):
         conn.commit()
     return res
     
-@app.put("/kind/{uuid}/state", response_model=str)
+@app.put("/engine/{uuid}/state", response_model=str)
 def update_state(uuid: UUID, state: str):
     with engine.connect() as conn:
         statement = update(App).where(App.uuid==uuid).values(state=state)
@@ -49,7 +49,7 @@ def update_state(uuid: UUID, state: str):
         conn.commit()
     return state
     
-@app.put("/kind/{uuid}/state", response_model=dict)
+@app.put("/engine/{uuid}/state", response_model=dict)
 def update_configuration(uuid: UUID, configuration: dict):
     with engine.connect() as conn:
         statement = update(App).where(App.uuid==uuid).values(configuration=configuration)
@@ -57,7 +57,7 @@ def update_configuration(uuid: UUID, configuration: dict):
         conn.commit()
     return configuration
     
-@app.put("/kind/{uuid}/specification", response_model=dict)
+@app.put("/engine/{uuid}/specification", response_model=dict)
 def update_configuration(uuid: UUID, specification: dict):
     with engine.connect() as conn:
         statement = update(App).where(App.uuid==uuid).values(specification=specification)
@@ -65,7 +65,7 @@ def update_configuration(uuid: UUID, specification: dict):
         conn.commit()
     return specification
 
-@app.put("/kind/{uuid}/settings", response_model=dict)
+@app.put("/engine/{uuid}/settings", response_model=dict)
 def update_configuration(uuid: UUID, settings: dict):
     with engine.connect() as conn:
         statement = update(App).where(App.uuid==uuid).values(settings=settings)

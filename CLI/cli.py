@@ -110,7 +110,7 @@ from typing import *
 
 def create_rest(path_to_json: str, out_dir: str) -> None:
     """
-    generating rest controllers to models in path and save code in out_dir/generated-rest.py
+    generating rest controllers to model in path and save code in out_dir/generated-rest.py
     :param path_to_json: path to json that describes model
     :param out_dir: directory where code will be saved
     :return: None
@@ -127,7 +127,7 @@ def create_rest(path_to_json: str, out_dir: str) -> None:
     uuid_string = "{uuid}"
     for key, value in configuration.items():
         string = f"""\
-@app.put("/kind/{uuid_string}/{key}", response_model=dict)
+@app.put("/{kind}/{uuid_string}/{key}", response_model=dict)
 def update_configuration(uuid: UUID, {key}: dict):
     with engine.connect() as conn:
         statement = update(App).where(App.uuid==uuid).values({key}={key})
@@ -158,21 +158,21 @@ def save_item(item: {name}):
         conn.commit()
     return item
 
-@app.get("/kind/{uuid_string}/")
+@app.get("/{kind}/{uuid_string}/")
 def get_item(uuid: UUID):
     with engine.connect() as conn:
         statement = select(App).where(App.uuid==uuid)
         res = conn.execute(statement).fetchall()
     return res
 
-@app.get("/kind/{uuid_string}/state")
+@app.get("/{kind}/{uuid_string}/state")
 def get_item_state(uuid: UUID):
     with engine.connect() as conn:
         statement = select(App.state).where(App.uuid==uuid)
         res = conn.execute(statement).fetchall()
     return res
     
-@app.delete("/kind/{uuid_string}/")
+@app.delete("/{kind}/{uuid_string}/")
 def delete_item(uuid: UUID):
     with engine.connect() as conn:
         statement = delete(App).where(App.uuid==uuid)
@@ -180,7 +180,7 @@ def delete_item(uuid: UUID):
         conn.commit()
     return res
     
-@app.put("/kind/{uuid_string}/state", response_model=str)
+@app.put("/{kind}/{uuid_string}/state", response_model=str)
 def update_state(uuid: UUID, state: str):
     with engine.connect() as conn:
         statement = update(App).where(App.uuid==uuid).values(state=state)
@@ -188,7 +188,7 @@ def update_state(uuid: UUID, state: str):
         conn.commit()
     return state
     
-@app.put("/kind/{uuid_string}/state", response_model=dict)
+@app.put("/{kind}/{uuid_string}/state", response_model=dict)
 def update_configuration(uuid: UUID, configuration: dict):
     with engine.connect() as conn:
         statement = update(App).where(App.uuid==uuid).values(configuration=configuration)
