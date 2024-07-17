@@ -49,7 +49,7 @@ def update_state(uuid: UUID, state: str):
         conn.commit()
     return state
     
-@app.put("/engine/{uuid}/state", response_model=dict)
+@app.put("/engine/{uuid}/configuration", response_model=dict)
 def update_configuration(uuid: UUID, configuration: dict):
     with engine.connect() as conn:
         statement = update(App).where(App.uuid==uuid).values(configuration=configuration)
