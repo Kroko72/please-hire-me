@@ -1,0 +1,10 @@
+{
+  "kind": "engine",
+  "name": "Example",
+  "description": "My test",
+  "version": "0.1.0",
+  "configuration":{
+    "specification": {},
+    "settings": {}
+  }
+}
