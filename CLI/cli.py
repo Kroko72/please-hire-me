@@ -13,7 +13,7 @@ def validate_json(schema) -> bool:
         Draft7Validator.check_schema(schema)
         return True
     except SchemaError as e:
-        print(f"Schema is invalid: {str(e)}")
+        print(f"Schema is invalid: {e}")
         return False
 
 
