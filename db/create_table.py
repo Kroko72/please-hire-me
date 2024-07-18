@@ -11,7 +11,7 @@ class App(Base):
     uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True, nullable=False)
     kind = Column(String(32), nullable=False)
     name = Column(String(128), nullable=False)
-    version = Column(String(), nullable=False)  # TODO: regex
+    version = Column(String(), nullable=False)
     description = Column(Text(4096), nullable=True)
     state = Column(Enum('NEW', 'INSTALLING', 'RUNNING', name='state_enum'), default='NEW', nullable=False)
     json = Column(JSON, nullable=False)
