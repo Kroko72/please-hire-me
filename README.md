@@ -1,7 +1,7 @@
 # тестовое задание на стажировку VK
 ### Реализовано:
 1. Консольное приложение (```CLI/cli.py```), функционал которого: валидация JSON схем, генерация pydantic модели (через её JSON схему), генерация REST контроллеров для документов (представленных в JSON)
-2. Создана таблица Apps c помощью SqlAlchemy (Postgres), находится в ```db/create_table.py``` (```db/config.py``` - данные для подключения к Postgres)
+2. Создана таблица Apps c помощью SqlAlchemy (Postgres), SqlAlchemy код для неё находится в ```db/create_table.py``` (```db/config.py``` - данные для подключения к Postgres)
 3. C помощью cli сгенерирована модель Example (```generated_model.py```) на основе её JSON схемы (```CLI/example_schema.json```) и REST контроллеры (```generated_rest.py```) для документа (```CLI/example_rest_schema.json```), соответствующего этой схеме (валидация идёт в запросе с помощью FastApi по сгенерированной модели).
 
 ### Использование:
